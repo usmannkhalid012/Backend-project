@@ -1,12 +1,12 @@
 import mongoose,{Schema} from "mongoose";
 import { refreshAccessToken } from "../controllers/user.controller";
 const subscriptionSchema = new Schema({
-    userId:{
+    subscriber:{
         type:Schema.Types.ObjectId,
         ref:"User"},
         channel:{
             type:Schema.Types.ObjectId,
-            ref:"Channel"
+            ref:"User"
         }
         },{timestamps:true})
-  export const Subscription = mongoose.model("Subscription",subscriptionSchema)
+  export const Subscription = mongoose.model("Subscription",subscriptionSchema) 
