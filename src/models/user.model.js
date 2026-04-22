@@ -52,12 +52,15 @@ const userSchema = new Schema(
     }
 )
 userSchema.methods.isPasswordCorrect = async function (password) {
+    if (!password||!this.password) {
+        throw new Error("Password not found in DB");
+    }
+
     return await bcrypt.compare(password, this.password);
 };
-
 userSchema.pre("save", async function () {
     if (!this.isModified("password")) 
-        return ;
+        return ; 
     
     this.password = await bcrypt.hash(this.password,10)
    
